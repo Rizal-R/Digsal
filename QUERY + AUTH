@@ -1,0 +1,45 @@
+const clientBE = new ApolloClient({
+  uri: 'https://trialdigsal-be.dwp.io',
+  headers: {
+    Authorization: `Bearer 3213f8411ab4a1ff1c997a331decc71b`
+  },
+  cache: new InMemoryCache()
+});
+const MY_QUERY_BE =  gql`
+  query(
+    $page: Int,
+    $dataPerPage: Int,
+    $status: String,
+    $search: String,
+    $startDate: String,
+    $endDate: String,
+    $counterType: String
+  ) {
+    getCustomer(
+      page: $page,
+      dataPerPage: $dataPerPage,
+      status: $status,
+      search: $search,
+      startDate: $startDate,
+      endDate: $endDate
+    ) {
+      totalCount
+      customers {
+        id
+        customerName
+        email
+        phone
+        npwp
+        address
+        city{
+          name
+        }
+        status
+        registerVia
+        billingName
+        paymentDate
+        createCustomerDate
+      }
+    }
+  }
+`;
